@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="./css/style.css">    
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>hello</h1>
+    <div class="dropdown">
+      <button class="dropbtn">장르</button>
+      <div class="dropdown-content">
+        <a href="#" class="genre-item" data-code="all">전체</a>
+        <% for(var i = 0; i < genre.length-1; i++){ %>
+        <% const 코드 = genre[i].코드 %>
+        <% const 이름 = genre[i].이름 %>
+        <a href="#" class="genre-item" data-code="<%= 코드 %>"><%= 이름 %></a>
+        <% } %>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>장르</th>
+          <th>제목</th>
+          <th>권수</th>
+          <th>가격</th>
+          <th>완결여부</th>
+          <th>책장번호</th>
+          <th>칸번호</th>
+          <th>비고1</th>
+          <th>비고2</th>
+        </tr>
+      </thead>
+      <tbody id="bookList">
+        <% for(var i = bookList.length-1; i >= 0; i--){ %>
+        <tr data-code="<%= bookList[i].장르 %>">
+          <% for(var j = 0; j < genre.length-1; j++){ %>
+            <% const 코드 = genre[j].코드 %>
+            <% const 이름 = genre[j].이름 %>
+            <% if(코드 == bookList[i].장르){ %>
+              <td><%= 이름 %></td>
+              <% break %>
+            <% } %>
+          <% } %>
+          <td><%= bookList[i].제목 %></td>
+          <td><%= bookList[i].권수 %></td>
+          <td><%= bookList[i].가격 %></td>
+          <td><%= bookList[i].완결여부 %></td>
+          <td><%= bookList[i].책장번호 %></td>
+          <td><%= bookList[i].칸번호 %></td>
+          <td><%= bookList[i].비고1 %></td>
+          <td><%= bookList[i].비고2 %></td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <script src="./script/script.js"></script>
+  </body>
+</html>

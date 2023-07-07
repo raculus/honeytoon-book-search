@@ -8,6 +8,9 @@
   </head>
   <body>
     <h1>hello</h1>
+    <div class="search-container">
+      <input type="text" placeholder="도서 검색" id="searchInput" />
+    </div>
     <div class="dropdown">
       <button class="dropbtn">장르</button>
       <div class="dropdown-content">
@@ -50,6 +53,10 @@
           <td><%= bookList[i].가격 %></td>
           <td><%= bookList[i].완결여부 %></td>
           <td><%= bookList[i].책장번호 %></td>
+          <% var maxBookcase = 0 %>
+          <% if(maxBookcase < bookList[i].책장번호){ %>
+            <% maxBookcase = bookList[i].책장번호 %>
+          <% } %>
           <td><%= bookList[i].칸번호 %></td>
           <td><%= bookList[i].비고1 %></td>
           <td><%= bookList[i].비고2 %></td>

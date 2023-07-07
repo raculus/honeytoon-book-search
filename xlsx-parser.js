@@ -28,8 +28,28 @@ function getIsComplete() {
   return data_isComplete;
 }
 
+function getBookcaseNums(data) {
+  // 책장번호를 담을 배열
+  const bookcaseNums = [];
+
+  // 데이터 반복문을 돌면서 책장번호 배열에 추가
+  data.forEach((book) => {
+    const bookcaseNum = parseInt(book.책장번호, 10);
+    if (!bookcaseNums.includes(bookcaseNum)) {
+      bookcaseNums.push(bookcaseNum);
+    }
+  });
+
+  // 책장번호 오름차순으로 정렬
+  bookcaseNums.sort((a, b) => a - b);
+
+  // 책장번호를 문자열로 변환하여 반환
+  return bookcaseNums;
+}
+
 module.exports = {
   getBookList,
   getGenre,
   getIsComplete,
+  getBookcaseNums,
 };

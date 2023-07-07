@@ -1,52 +1,49 @@
-const genreItems = document.querySelectorAll(".genre-item");
-const bookList = document.getElementById("bookList");
+// 필터링 함수 생성
+function applyFilters() {
+  const bookList = document.querySelectorAll("#bookList tr");
+  const searchKeyword = document.querySelector("#searchInput").value.toLowerCase();
+  const selectedGenre = document.querySelector("#dropbtn-genre").textContent.split(" ")[1];
+  const selectedBookcase = document.querySelector("#dropbtn-bookcase").textContent.split(" ")[1];
 
+  bookList.forEach((book) => {
+    // 필터링 조건을 먼저 검사한다.
+    const bookGenre = book.querySelector(".genre-name").textContent;
+    const bookcaseNum = book.querySelector(".bookcase-num").textContent;
+
+    const genreMatch = selectedGenre === "전체" || selectedGenre === bookGenre;
+    const bookcaseMatch = selectedBookcase === "전체" || selectedBookcase === bookcaseNum;
+    const keywordMatch = book.querySelector("td:nth-child(2)").textContent.toLowerCase().includes(searchKeyword);
+
+    if (genreMatch && bookcaseMatch && keywordMatch) {
+      book.style.display = "table-row";
+    } else {
+      book.style.display = "none";
+    }
+  });
+}
+
+// 도서명 검색
+const searchInput = document.getElementById("searchInput");
+searchInput.addEventListener("input", () => {
+  applyFilters();
+});
+
+// 장르 선택
+const genreItems = document.querySelectorAll(".genre-item");
 genreItems.forEach((item) => {
   item.addEventListener("click", () => {
-    // 클릭한 아이템의 코드를 가져온다.
-    const code = item.dataset.code;
-
-    // 모든 tr 요소들을 가져온다.
-    const trs = bookList.getElementsByTagName("tr");
-
-    if (code === "all") {
-      for (let i = 0; i < trs.length; i++) {
-        trs[i].style.display = "";
-      }
-      return;
-    }
-
-    // 모든 tr 요소들을 순회하고, data-code 속성의 값을 검사한다.
-    for (let i = 0; i < trs.length; i++) {
-      const trCode = trs[i].dataset.code;
-      if (trCode === code) {
-        // 선택된 아이템과 동일한 code 값을 갖는 tr 요소는 보여준다.
-        trs[i].style.display = "";
-      } else {
-        // 선택된 아이템과 다른 code 값을 갖는 tr 요소는 숨긴다.
-        trs[i].style.display = "none";
-      }
-    }
+    const clickedCode = item.dataset.code;
+    document.getElementById("dropbtn-genre").innerText = `장르: ${clickedCode}`;
+    applyFilters();
   });
 });
 
-const searchInput = document.getElementById("searchInput");
-
-searchInput.addEventListener("input", () => {
-  filterBooks(searchInput.value);
+// 책장 선택
+const bookcaseItems = document.querySelectorAll(".bookcase-item");
+bookcaseItems.forEach((item) => {
+  item.addEventListener("click", () => {
+    const clickedCode = item.dataset.code;
+    document.getElementById("dropbtn-bookcase").innerText = `책장: ${clickedCode}`;
+    applyFilters();
+  });
 });
-
-function filterBooks(keyword) {
-  // 모든 tr 요소들을 가져온다.
-  const trs = bookList.getElementsByTagName("tr");
-
-  // 모든 tr 요소들을 순회하고, 제목에 keyword가 포함되지 않은 요소는 숨긴다.
-  for (let i = 0; i < trs.length; i++) {
-    const 제목 = trs[i].getElementsByTagName("td")[1].textContent;
-    if (제목.toLowerCase().indexOf(keyword.toLowerCase()) > -1) {
-      trs[i].style.display = "";
-    } else {
-      trs[i].style.display = "none";
-    }
-  }
-}

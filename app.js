@@ -18,6 +18,13 @@ app.get("/", (req, res) => {
   });
 });
 
+app.get("/map", (req, res) => {
+  const num = req.query.num;
+  res.render("map", {
+    num: num,
+  });
+});
+
 app.listen(port, () => {
   console.log(`Starting server : http://localhost:${port}`);
 });

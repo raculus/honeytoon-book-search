@@ -31,18 +31,35 @@ th {
   background-color: #231815;
 }
 
-tr:nth-child(odd) {
-  background: rgba(255, 255, 255, 0.8);
+tr.odd {
+  background-color: rgba(255, 255, 255, 0.8);
 }
-tr:nth-child(even) {
-  background: rgba(255, 255, 255, 0.5);
+tr.even {
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 table tbody tr {
-  line-height: 3rem;
+  line-height: 2rem;
 }
 
 th,
 td {
-  padding: 5px;
+  padding: 2px;
+}
+
+table {
+  width: 80vw;
+}
+
+button {
+  box-sizing: border-box;
+}
+
+.hide {
+  display: none;
+}
+
+object {
+  width: 80vw;
+  height: 1000px;
 }

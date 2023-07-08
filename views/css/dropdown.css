@@ -5,7 +5,7 @@
   padding: 16px;
   font-size: 16px;
   border: none;
-
+  width: 10vw;
   transition: background-color 0.3s ease; /* 부드러운 애니메이션 효과 추가 */
 }
 

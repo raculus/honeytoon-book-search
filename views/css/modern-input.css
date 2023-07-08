@@ -41,7 +41,7 @@
   display: block;
   transition: 0.2s;
   font-size: 1rem;
-  color: #fabf1b;
+  color: #231815c4;
   font-weight: 700;
 }
 
@@ -49,7 +49,7 @@
   padding-bottom: 6px;
   font-weight: 700;
   border-width: 3px;
-  border-image: linear-gradient(to right, #fabf1b, #fabf1b);
+  border-image: linear-gradient(to right, #231815c4, #231815c4);
   border-image-slice: 1;
 }
 

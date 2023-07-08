@@ -1,7 +1,7 @@
 const xlsxParser = require("./xlsx-parser");
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = 3001;
 
 app.use(express.static("views"));
 app.set("view engine", "ejs");
@@ -23,6 +23,11 @@ app.get("/map", (req, res) => {
   res.render("map", {
     num: num,
   });
+});
+
+app.get("/reload", (req, res) => {
+  xlsxParser.reloadXlsx();
+  res.redirect("/");
 });
 
 app.listen(port, () => {

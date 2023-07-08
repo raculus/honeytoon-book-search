@@ -12,9 +12,21 @@ const sheet_booklist = workbook.Sheets[names_booklist];
 const sheet_genre = workbook.Sheets[names_genre];
 const sheet_isComplete = workbook.Sheets[names_isComplete];
 
-const data_booklist = xlsx.utils.sheet_to_json(sheet_booklist);
-const data_genre = xlsx.utils.sheet_to_json(sheet_genre);
-const data_isComplete = xlsx.utils.sheet_to_json(sheet_isComplete);
+let data_booklist = xlsx.utils.sheet_to_json(sheet_booklist);
+let data_genre = xlsx.utils.sheet_to_json(sheet_genre);
+let data_isComplete = xlsx.utils.sheet_to_json(sheet_isComplete);
+
+function reloadXlsx() {
+  const reloadedWorkbook = xlsx.readFile(filename);
+
+  const reloadedData_booklist = xlsx.utils.sheet_to_json(reloadedWorkbook.Sheets[names_booklist]);
+  const reloadedData_genre = xlsx.utils.sheet_to_json(reloadedWorkbook.Sheets[names_genre]);
+  const reloadedData_isComplete = xlsx.utils.sheet_to_json(reloadedWorkbook.Sheets[names_isComplete]);
+
+  data_booklist = reloadedData_booklist;
+  data_genre = reloadedData_genre;
+  data_isComplete = reloadedData_isComplete;
+}
 
 function getBookList() {
   return data_booklist;
@@ -52,4 +64,5 @@ module.exports = {
   getGenre,
   getIsComplete,
   getBookcaseNums,
+  reloadXlsx,
 };

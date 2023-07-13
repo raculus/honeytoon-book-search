@@ -55,21 +55,22 @@
       </table>
       <table>
         <thead>
-          <tr>
+          <tr>            
             <th>장르</th>
             <th>제목</th>
-            <th>최종권수</th>
-            <th>가격</th>
-            <th>완결여부</th>
             <th>책장번호</th>
-            <th>칸번호</th>
-            <th>비고1</th>
-            <th>비고2</th>
+            <th>최종권수</th>
+            <!-- <th>가격</th> -->
+            <!-- <th>완결여부</th> -->
+            <!-- <th>칸번호</th> -->
+            <!-- <th>비고1</th> -->
+            <!-- <th>비고2</th> -->
           </tr>
         </thead>
         <tbody id="bookList">
           <% for(var i = bookList.length-1; i >= 0; i--){ %>
           <tr>
+            <!-- 장르 -->
             <% for(var j = 0; j < genre.length-1; j++){ %>
               <% const 코드 = genre[j].코드 %>
               <% const 이름 = genre[j].이름 %>
@@ -79,14 +80,15 @@
               <% } %>
             <% } %>
             <td><%= bookList[i].제목 %></td>
-            <td><%= bookList[i].권수 %></td>
-            <td><%= bookList[i].가격 %></td>
-            <td><%= bookList[i].완결여부 %></td>
+            <!-- 책장번호 -->
             <% const bookcaseNum = parseInt(bookList[i].책장번호, 10) %>
-            <td class="bookcase-num"><%= bookcaseNum %></td>
-            <td><%= bookList[i].칸번호 %></td>
-            <td><%= bookList[i].비고1 %></td>
-            <td><%= bookList[i].비고2 %></td>
+            <td class="bookcase-num text-center"><%= bookcaseNum %></td>
+            <td class="text-center"><%= bookList[i].권수 %></td>
+            <!-- <td><%# = bookList[i].가격 %></td> -->
+            <!-- <td><%# = bookList[i].완결여부 %></td> -->
+            <!-- <td><%# = bookList[i].칸번호 %></td> -->
+            <!-- <td><%# = bookList[i].비고1 %></td> -->
+            <!-- <td><%# = bookList[i].비고2 %></td> -->
           </tr>
           <% } %>
         </tbody>

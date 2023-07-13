@@ -2,9 +2,20 @@ const trList = document.querySelectorAll("tbody#bookList tr");
 let currentImage = null;
 let previousClickedRow = null;
 
+function removeMap() {
+  if (currentImage) {
+    const parent = currentImage.parentNode.parentNode;
+    parent.remove();
+    parent.removeChild(currentImage.parentNode);
+    currentImage = null;
+    previousClickedRow = null;
+  }
+}
+
 for (let i = 0; i < trList.length; i++) {
   trList[i].addEventListener("click", function () {
     const bookcaseNum = parseInt(trList[i].getElementsByClassName("bookcase-num")[0].textContent);
+
     // 이미지 토글
     if (this === previousClickedRow) {
       if (currentImage) {
@@ -18,12 +29,7 @@ for (let i = 0; i < trList.length; i++) {
     }
 
     // 이미지 삭제
-    if (currentImage) {
-      const parent = currentImage.parentNode.parentNode;
-      parent.remove();
-      parent.removeChild(currentImage.parentNode);
-      currentImage = null;
-    }
+    removeMap();
 
     // 이미지 추가
     const newRow = document.createElement("tr");
@@ -45,6 +51,7 @@ for (let i = 0; i < trList.length; i++) {
 
 // 검색 필터링
 function applyFilters() {
+  removeMap();
   const bookList = document.querySelectorAll("#bookList > tr");
   const searchKeyword = document.querySelector("#searchInput").value.toLowerCase();
   const selectedGenre = document.querySelector("#dropbtn-genre").textContent.split(" ")[1];

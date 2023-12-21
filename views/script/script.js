@@ -74,6 +74,15 @@ function applyFilters() {
     }
   });
 
+  // 필터가 전체가 아니면서 검색 결과가 없을 경우
+  if (filteredBooks.length === 0) {
+    if (selectedGenre != "전체" || selectedBookcase != "전체") {
+      // 필터 전체로 초기화
+      document.querySelector("#dropbtn-genre").innerText = "장르: 전체";
+      document.querySelector("#dropbtn-bookcase").innerText = "책장: 전체";
+    }
+  }
+
   // 홀수번째 책과 짝수번째 책에 다른 스타일을 적용한다.
   filteredBooks.forEach((book, index) => {
     if (index % 2 === 0) {

@@ -80,3 +80,26 @@ bookcaseItems.forEach((item) => {
 });
 
 applyFilters();
+
+// 클릭한 요소 수정
+// TODO: 수정한 데이터를 서버로 전송
+// TODO: 다른 요소 클릭하면 수정모드 해제
+const tdList = document.querySelectorAll("#bookList > tr > td");
+tdList.forEach((td) => {
+  td.addEventListener("click", () => {
+    const input = document.createElement("input");
+    input.type = "text";
+    input.value = td.textContent;
+
+    td.appendChild(input);
+    input.focus();
+
+    input.addEventListener("keypress", (event) => {
+      if (event.key === "Enter") {
+        const userInput = input.value;
+        updateData();
+        td.removeChild(input);
+      }
+    });
+  });
+});

@@ -31,9 +31,9 @@
               <button class="dropbtn" id="dropbtn-genre">장르: 전체</button>
               <div class="dropdown-content">
                 <a href="#" class="genre-item" data-code="전체">전체</a>
-                <% for(var i = 0; i < genre.length-1; i++){ %>
-                <% const 이름 = genre[i].이름 %>
-                <a href="#" class="genre-item" data-code="<%= 이름 %>"><%= 이름 %></a>
+                <% for(var i = 0; i < genreList.length-1; i++){ %>
+                <% const genre = genreList[i] %>
+                <a href="#" class="genre-item" data-code="<%= genre %>"><%= genre %></a>
                 <% } %>
               </div>
             </div>
@@ -58,10 +58,10 @@
       <table>
         <thead>
           <tr>            
-            <th>장르</th>
-            <th>제목</th>
             <th>책장번호</th>
-            <th>최종권수</th>
+            <th>제목</th>
+            <th>장르</th>
+            <th>권수</th>
             <!-- <th>가격</th> -->
             <!-- <th>완결여부</th> -->
             <!-- <th>칸번호</th> -->
@@ -70,22 +70,16 @@
           </tr>
         </thead>
         <tbody id="bookList">
-          <% for(var i = bookList.length-1; i >= 0; i--){ %>
+          <% for(var i = 0; i < bookList.length; i++){ %>
           <tr>
-            <!-- 장르 -->
-            <% for(var j = 0; j < genre.length-1; j++){ %>
-              <% const 코드 = genre[j].코드 %>
-              <% const 이름 = genre[j].이름 %>
-              <% if(코드 == bookList[i].장르){ %>
-                <td class="genre-name"><%= 이름 %></td>
-                <% break %>
-              <% } %>
-            <% } %>
-            <td><%= bookList[i].제목 %></td>
             <!-- 책장번호 -->
-            <% const bookcaseNum = parseInt(bookList[i].책장번호, 10) %>
-            <td class="bookcase-num text-center"><%= bookcaseNum %></td>
-            <td class="text-center"><%= bookList[i].권수 %></td>
+            <td class="bookcase-num text-center"><%= parseInt(bookList[i].bookcaseNum, 10) %></td>
+            <!-- 제목 -->
+            <td><%= bookList[i].title %></td>
+            <!-- 장르 -->
+            <td class="genre-name"><%= bookList[i].genre %></td>
+            <!-- 권수 -->
+            <td class="text-center"><%= bookList[i].volume %><%= bookList[i].isComplete %></td>
             <!-- <td><%# = bookList[i].가격 %></td> -->
             <!-- <td><%# = bookList[i].완결여부 %></td> -->
             <!-- <td><%# = bookList[i].칸번호 %></td> -->

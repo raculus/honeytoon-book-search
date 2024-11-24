@@ -1,3 +1,20 @@
+async function checkUpdates() {
+  try {
+    const response = await fetch("/check-updates");
+    const data = await response.json();
+
+    if (data.isUpdated) {
+      console.log("Data updated. Reloading page...");
+      location.reload(); // 페이지 새로고침
+    }
+  } catch (error) {
+    console.error("Error checking updates:", error);
+  }
+}
+
+// 60초마다 확인
+setInterval(checkUpdates, 60000);
+
 const trList = document.querySelectorAll("tbody#bookList tr");
 let currentImage = null;
 let previousClickedRow = null;
@@ -65,7 +82,9 @@ function applyFilters() {
 
     const genreMatch = selectedGenre === "전체" || selectedGenre === bookGenre;
     const bookcaseMatch = selectedBookcase === "전체" || selectedBookcase === bookcaseNum;
-    const keywordMatch = book.querySelector("td:nth-child(2)").textContent.toLowerCase().includes(searchKeyword);
+    let title = book.querySelector("td:nth-child(2)").textContent.toLowerCase();
+    title = title.replace(" ", "");
+    const keywordMatch = title.includes(searchKeyword);
 
     if (genreMatch && bookcaseMatch && keywordMatch) {
       filteredBooks.push(book);
@@ -74,13 +93,8 @@ function applyFilters() {
     }
   });
 
-  // 필터가 전체가 아니면서 검색 결과가 없을 경우
-  if (filteredBooks.length === 0) {
-    if (selectedGenre != "전체" || selectedBookcase != "전체") {
-      // 필터 전체로 초기화
-      document.querySelector("#dropbtn-genre").innerText = "장르: 전체";
-      document.querySelector("#dropbtn-bookcase").innerText = "책장: 전체";
-    }
+  if (filteredBooks.length === 1) {
+    filteredBooks[0].click();
   }
 
   // 홀수번째 책과 짝수번째 책에 다른 스타일을 적용한다.

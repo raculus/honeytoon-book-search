@@ -33,7 +33,9 @@ class SheetParser {
       const csvData = response.data;
       return csvData;
     } catch (error) {
-      throw new Error('Error fetching spreadsheet data:', error);
+      console.error('Error fetching spreadsheet data:', error);
+      console.log('Retrying...');
+      return await this.fetchSheet();
     }
   }
 
